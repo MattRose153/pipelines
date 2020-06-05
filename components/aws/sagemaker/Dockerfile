@@ -30,7 +30,7 @@ RUN pip3 install \
 
 COPY LICENSE.txt .
 COPY NOTICE.txt .
-COPY THIRD-PARTY-LICENSES.txt .
+COPY THIRD-PARTY-LICENSES.txt /app/THIRD-PARTY-LICENSES.txt
 COPY hyperparameter_tuning/src/hyperparameter_tuning.py .
 COPY train/src/train.py .
 COPY deploy/src/deploy.py .
