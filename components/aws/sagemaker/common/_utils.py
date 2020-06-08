@@ -800,6 +800,7 @@ def create_labeling_job_request(args):
 def create_labeling_job(client, args):
     """Create a SageMaker Ground Truth job"""
     request = create_labeling_job_request(args)
+    logging.info(f"Role ARN: {request['RoleArn']}")
     try:
         client.create_labeling_job(**request)
         gt_job_name = request['LabelingJobName']
