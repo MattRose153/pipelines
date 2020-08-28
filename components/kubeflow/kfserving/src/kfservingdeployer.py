@@ -120,6 +120,7 @@ def customEndpointSpec(custom_model_spec, service_account):
         predictor=V1alpha2PredictorSpec(
             custom=V1alpha2CustomSpec(container=containerSpec),
             service_account_name=service_account,
+            min_replicas=1
         )
     )
 
