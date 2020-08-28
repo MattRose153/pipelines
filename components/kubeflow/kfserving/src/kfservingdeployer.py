@@ -97,6 +97,14 @@ def customEndpointSpec(custom_model_spec, service_account):
         if custom_model_spec.get("port", "")
         else None
     )
+    resources = (
+        client.V1ResourceRequirements(
+            limits=custom_model_spec.get("resource_limits", None),
+            requests=custom_model_spec.get("resource_requests", None)
+        )
+        if custom_model_spec.get("resource_limits", "") and custom_model_spec.get("resource_requests", "")
+        else None
+    )
     containerSpec = client.V1Container(
         name=custom_model_spec.get("name", "custom-container"),
         image=custom_model_spec["image"],
@@ -106,6 +114,7 @@ def customEndpointSpec(custom_model_spec, service_account):
         args=custom_model_spec.get("args", None),
         image_pull_policy=custom_model_spec.get("image_pull_policy", None),
         working_dir=custom_model_spec.get("working_dir", None),
+        resources=resources
     )
     return V1alpha2EndpointSpec(
         predictor=V1alpha2PredictorSpec(
